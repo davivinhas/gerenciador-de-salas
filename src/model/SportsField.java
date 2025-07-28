@@ -16,6 +16,7 @@ public class SportsField extends Space{
         this.numOfHoops = numOfBasketballHoops;
     }
 
+    // Métodos utilitários
     @Override
     public String getType() {
         return "SportsField";
@@ -27,11 +28,28 @@ public class SportsField extends Space{
                 numOfGoals, numOfNets, numOfHoops);
     }
 
+    // Getters e Setters
     public int getNumOfGoals() {
         return numOfGoals;
     }
 
     public void setNumOfGoals(int numOfGoals) {
         this.numOfGoals = numOfGoals;
+    }
+
+    public int getNumOfHoops() {
+        return numOfHoops;
+    }
+
+    public void setNumOfHoops(int numOfHoops) {
+        this.numOfHoops = numOfHoops;
+    }
+
+    public int getNumOfNets() {
+        return numOfNets;
+    }
+
+    public void setNumOfNets(int numOfNets) {
+        this.numOfNets = numOfNets;
     }
 }
