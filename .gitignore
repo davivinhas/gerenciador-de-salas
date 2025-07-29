@@ -4,6 +4,7 @@ out/
 !**/src/test/**/out/
 <<<<<<< HEAD
 .idea/
+*.iml
 =======
 >>>>>>> spacecontroller-logger
 
