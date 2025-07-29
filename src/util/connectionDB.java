@@ -4,9 +4,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class connectionDB {
-    private static final String URL = "jdbc:mysql://localhost:3306/gerenciador_espacos";
+    private static final String URL = "jdbc:mysql://switchback.proxy.rlwy.net:28040/railway";
     private static final String USER = "root";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "NEqnqCpxSThEvagNFeQothEGLATXWvhU";
 
     // Se conecta com o banco de dados
     public static Connection getConnection() {
@@ -39,4 +39,14 @@ public class connectionDB {
         }
         return false;
     }
+    public static void main(String[] args) {
+        Connection connection = getConnection();
+        if (connection != null) {
+            System.out.println("✅ Conexão bem-sucedida com o banco de dados!");
+            endConnection(connection);
+        } else {
+            System.out.println("❌ Falha ao conectar com o banco de dados.");
+        }
+    }
+
 }
