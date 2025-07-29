@@ -998,7 +998,11 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
       <Current>1</Current>
       <LastIntrospectionLevel>3</LastIntrospectionLevel>
+<<<<<<< HEAD
       <LastIntrospectionLocalTimestamp>2025-07-29.03:09:08</LastIntrospectionLocalTimestamp>
+=======
+      <LastIntrospectionLocalTimestamp>2025-07-28.19:23:43</LastIntrospectionLocalTimestamp>
+>>>>>>> spacecontroller-logger
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="289" parent="1" name="information_schema">
@@ -1052,16 +1056,25 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
+<<<<<<< HEAD
     <table id="301" parent="288" name="reservations">
+=======
+    <table id="301" parent="288" name="spaces">
+>>>>>>> spacecontroller-logger
       <DetailsLevel>3</DetailsLevel>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
+<<<<<<< HEAD
     <table id="302" parent="288" name="spaces">
+=======
+    <table id="302" parent="288" name="sports_fields">
+>>>>>>> spacecontroller-logger
       <DetailsLevel>3</DetailsLevel>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
+<<<<<<< HEAD
     <table id="303" parent="288" name="sports_fields">
       <DetailsLevel>3</DetailsLevel>
       <Engine>InnoDB</Engine>
@@ -1073,142 +1086,242 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
     <column id="305" parent="297" name="space_id">
+=======
+    <column id="303" parent="297" name="space_id">
+>>>>>>> spacecontroller-logger
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="306" parent="297" name="num_of_sound_systems">
+=======
+    <column id="304" parent="297" name="num_of_sound_systems">
+>>>>>>> spacecontroller-logger
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="307" parent="297" name="num_of_stages">
+=======
+    <column id="305" parent="297" name="num_of_stages">
+>>>>>>> spacecontroller-logger
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <foreign-key id="308" parent="297" name="auditoriums_ibfk_1">
+=======
+    <foreign-key id="306" parent="297" name="auditoriums_ibfk_1">
+>>>>>>> spacecontroller-logger
       <ColNames>space_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>spaces</RefTableName>
     </foreign-key>
+<<<<<<< HEAD
     <index id="309" parent="297" name="PRIMARY">
+=======
+    <index id="307" parent="297" name="PRIMARY">
+>>>>>>> spacecontroller-logger
       <ColNames>space_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
+<<<<<<< HEAD
     <key id="310" parent="297" name="PRIMARY">
+=======
+    <key id="308" parent="297" name="PRIMARY">
+>>>>>>> spacecontroller-logger
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
+<<<<<<< HEAD
     <column id="311" parent="298" name="space_id">
+=======
+    <column id="309" parent="298" name="space_id">
+>>>>>>> spacecontroller-logger
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="312" parent="298" name="num_of_boards">
+=======
+    <column id="310" parent="298" name="num_of_boards">
+>>>>>>> spacecontroller-logger
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="313" parent="298" name="num_of_data_shows">
+=======
+    <column id="311" parent="298" name="num_of_data_shows">
+>>>>>>> spacecontroller-logger
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <foreign-key id="314" parent="298" name="classrooms_ibfk_1">
+=======
+    <foreign-key id="312" parent="298" name="classrooms_ibfk_1">
+>>>>>>> spacecontroller-logger
       <ColNames>space_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>spaces</RefTableName>
     </foreign-key>
+<<<<<<< HEAD
     <index id="315" parent="298" name="PRIMARY">
+=======
+    <index id="313" parent="298" name="PRIMARY">
+>>>>>>> spacecontroller-logger
       <ColNames>space_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
+<<<<<<< HEAD
     <key id="316" parent="298" name="PRIMARY">
+=======
+    <key id="314" parent="298" name="PRIMARY">
+>>>>>>> spacecontroller-logger
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
+<<<<<<< HEAD
     <column id="317" parent="299" name="space_id">
+=======
+    <column id="315" parent="299" name="space_id">
+>>>>>>> spacecontroller-logger
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="318" parent="299" name="num_of_computers">
+=======
+    <column id="316" parent="299" name="num_of_computers">
+>>>>>>> spacecontroller-logger
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="319" parent="299" name="lab_type">
+=======
+    <column id="317" parent="299" name="lab_type">
+>>>>>>> spacecontroller-logger
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <foreign-key id="320" parent="299" name="laboratories_ibfk_1">
+=======
+    <foreign-key id="318" parent="299" name="laboratories_ibfk_1">
+>>>>>>> spacecontroller-logger
       <ColNames>space_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>spaces</RefTableName>
     </foreign-key>
+<<<<<<< HEAD
     <index id="321" parent="299" name="PRIMARY">
+=======
+    <index id="319" parent="299" name="PRIMARY">
+>>>>>>> spacecontroller-logger
       <ColNames>space_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
+<<<<<<< HEAD
     <key id="322" parent="299" name="PRIMARY">
+=======
+    <key id="320" parent="299" name="PRIMARY">
+>>>>>>> spacecontroller-logger
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
+<<<<<<< HEAD
     <column id="323" parent="300" name="space_id">
+=======
+    <column id="321" parent="300" name="space_id">
+>>>>>>> spacecontroller-logger
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="324" parent="300" name="num_of_projectors">
+=======
+    <column id="322" parent="300" name="num_of_projectors">
+>>>>>>> spacecontroller-logger
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="325" parent="300" name="num_of_video_conferences">
+=======
+    <column id="323" parent="300" name="num_of_video_conferences">
+>>>>>>> spacecontroller-logger
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <foreign-key id="326" parent="300" name="meeting_rooms_ibfk_1">
+=======
+    <foreign-key id="324" parent="300" name="meeting_rooms_ibfk_1">
+>>>>>>> spacecontroller-logger
       <ColNames>space_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>spaces</RefTableName>
     </foreign-key>
+<<<<<<< HEAD
     <index id="327" parent="300" name="PRIMARY">
+=======
+    <index id="325" parent="300" name="PRIMARY">
+>>>>>>> spacecontroller-logger
       <ColNames>space_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
+<<<<<<< HEAD
     <key id="328" parent="300" name="PRIMARY">
+=======
+    <key id="326" parent="300" name="PRIMARY">
+>>>>>>> spacecontroller-logger
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
+<<<<<<< HEAD
     <column id="329" parent="301" name="id">
+=======
+    <column id="327" parent="301" name="id">
+>>>>>>> spacecontroller-logger
       <AutoIncrement>1</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="330" parent="301" name="user_id">
       <NotNull>1</NotNull>
       <Position>2</Position>
@@ -1278,40 +1391,68 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <StoredType>int|0s</StoredType>
     </column>
     <column id="344" parent="302" name="name">
+=======
+    <column id="328" parent="301" name="name">
+>>>>>>> spacecontroller-logger
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="345" parent="302" name="localization">
+=======
+    <column id="329" parent="301" name="localization">
+>>>>>>> spacecontroller-logger
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>varchar(200)|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="346" parent="302" name="capacity">
+=======
+    <column id="330" parent="301" name="capacity">
+>>>>>>> spacecontroller-logger
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="347" parent="302" name="available_hours">
+=======
+    <column id="331" parent="301" name="available_hours">
+>>>>>>> spacecontroller-logger
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="348" parent="302" name="creation_date">
+=======
+    <column id="332" parent="301" name="creation_date">
+>>>>>>> spacecontroller-logger
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StoredType>datetime|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="349" parent="302" name="space_type">
+=======
+    <column id="333" parent="301" name="space_type">
+>>>>>>> spacecontroller-logger
       <NotNull>1</NotNull>
       <Position>7</Position>
       <StoredType>varchar(20)|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <index id="350" parent="302" name="PRIMARY">
+=======
+    <index id="334" parent="301" name="PRIMARY">
+>>>>>>> spacecontroller-logger
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
+<<<<<<< HEAD
     <index id="351" parent="302" name="idx_name">
       <ColNames>name</ColNames>
       <Type>btree</Type>
@@ -1321,49 +1462,89 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Type>btree</Type>
     </index>
     <key id="353" parent="302" name="PRIMARY">
+=======
+    <index id="335" parent="301" name="idx_name">
+      <ColNames>name</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="336" parent="301" name="idx_space_type">
+      <ColNames>space_type</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="337" parent="301" name="PRIMARY">
+>>>>>>> spacecontroller-logger
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
+<<<<<<< HEAD
     <column id="354" parent="303" name="space_id">
+=======
+    <column id="338" parent="302" name="space_id">
+>>>>>>> spacecontroller-logger
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="355" parent="303" name="num_of_hoops">
+=======
+    <column id="339" parent="302" name="num_of_hoops">
+>>>>>>> spacecontroller-logger
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="356" parent="303" name="num_of_nets">
+=======
+    <column id="340" parent="302" name="num_of_nets">
+>>>>>>> spacecontroller-logger
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <column id="357" parent="303" name="num_of_goals">
+=======
+    <column id="341" parent="302" name="num_of_goals">
+>>>>>>> spacecontroller-logger
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>int|0s</StoredType>
     </column>
+<<<<<<< HEAD
     <foreign-key id="358" parent="303" name="sports_fields_ibfk_1">
+=======
+    <foreign-key id="342" parent="302" name="sports_fields_ibfk_1">
+>>>>>>> spacecontroller-logger
       <ColNames>space_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>spaces</RefTableName>
     </foreign-key>
+<<<<<<< HEAD
     <index id="359" parent="303" name="PRIMARY">
+=======
+    <index id="343" parent="302" name="PRIMARY">
+>>>>>>> spacecontroller-logger
       <ColNames>space_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
+<<<<<<< HEAD
     <key id="360" parent="303" name="PRIMARY">
+=======
+    <key id="344" parent="302" name="PRIMARY">
+>>>>>>> spacecontroller-logger
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
+<<<<<<< HEAD
     <column id="361" parent="304" name="id">
       <AutoIncrement>1</AutoIncrement>
       <NotNull>1</NotNull>
@@ -1413,5 +1594,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <key id="370" parent="304" name="email">
       <UnderlyingIndexName>email</UnderlyingIndexName>
     </key>
+=======
+>>>>>>> spacecontroller-logger
   </database-model>
 </dataSource>
