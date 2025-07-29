@@ -23,7 +23,7 @@ public class UserDao implements DataAccessObject<User>{
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
-            statement.setString(4, user.getType().getDescription()); //testa dps .name()
+            statement.setString(4, user.getType().name()); //testa dps .name()
             statement.setTimestamp(5, Timestamp.valueOf(user.getCreationDate()));
             return statement.executeUpdate() > 0;
         }catch (SQLException e){
@@ -40,7 +40,7 @@ public class UserDao implements DataAccessObject<User>{
                 statement.setString(1, user.getName());
                 statement.setString(2, user.getEmail());
                 statement.setString(3, user.getPassword());
-                statement.setString(4, user.getType().getDescription());
+                statement.setString(4, user.getType().name());
                 statement.setTimestamp(5, Timestamp.valueOf(user.getCreationDate()));
                 statement.setInt(6, user.getId());
                 return statement.executeUpdate() > 0;
@@ -52,7 +52,7 @@ public class UserDao implements DataAccessObject<User>{
     }
     @Override
     public boolean delete(User user){
-        String sql = "DELETE FROM user WHERE id = ?";
+        String sql = "DELETE FROM users WHERE id = ?";
         try{
             Connection connection = connectionDB.getConnection();
             PreparedStatement statement = Objects.requireNonNull(connection).prepareStatement(sql);
@@ -66,7 +66,7 @@ public class UserDao implements DataAccessObject<User>{
     }
     @Override
     public User findById(int id){
-        String sql = "SELECT * FROM user WHERE id = ?";
+        String sql = "SELECT * FROM users WHERE id = ?";
         try{
             Connection connection = connectionDB.getConnection();
             PreparedStatement statement = Objects.requireNonNull(connection).prepareStatement(sql);
@@ -101,7 +101,7 @@ public class UserDao implements DataAccessObject<User>{
     }
 
     public User findByEmail(String email){
-        String sql = "SELECT * FROM user WHERE email = ?";
+        String sql = "SELECT * FROM users WHERE email = ?";
         try{
             Connection connection = connectionDB.getConnection();
             PreparedStatement preparedStatement = Objects.requireNonNull(connection).prepareStatement(sql);
