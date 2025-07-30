@@ -39,6 +39,7 @@ public class connectionDB {
         }
         return false;
     }
+
     public static void main(String[] args) {
         Connection connection = getConnection();
         if (connection != null) {
@@ -48,3 +49,4 @@ public class connectionDB {
             System.out.println("❌ Falha ao conectar com o banco de dados.");
         }
     }
+}

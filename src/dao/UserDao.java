@@ -84,7 +84,7 @@ public class UserDao implements DataAccessObject<User>{
 
     @Override
     public List<User> listAll(){
-        String sql = "SELECT * FROM user";
+        String sql = "SELECT * FROM users";
         List<User> users = new ArrayList<>();
         try{
             Connection connection = connectionDB.getConnection();
