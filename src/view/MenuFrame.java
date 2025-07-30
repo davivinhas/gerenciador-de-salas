@@ -60,6 +60,7 @@ public class MenuFrame extends JFrame {
             addButton("Cadastrar Espaço", e -> openScreen(new RegisterSpaceScreen(user)));
             addButton("Remover Espaço", e -> openScreen(new DeleteSpaceScreen(user)));
             addButton("Gerenciar Usuários", e -> openScreen(new UserManagementScreen()));
+            addButton("Gerenciar Reservas", e -> openScreen(new ReservationManagementScreen(user)));
         }
 
         setVisible(true);
