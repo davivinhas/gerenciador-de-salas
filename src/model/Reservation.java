@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Reservation {
@@ -11,6 +12,9 @@ public class Reservation {
     private LocalDateTime endDateTime;
     private String description;
     private LocalDateTime creationDate;
+    private LocalDate date;
+    private String hour;
+    private Space space;
 
     public Reservation(){
         this.creationDate = LocalDateTime.now();
@@ -75,6 +79,20 @@ public class Reservation {
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
+    public LocalDate getDate() {return date;}
+    public void setDate(LocalDate date){this.date = date;}
+    public String getHour(){return hour;}
+    public void setHour(String hour){this.hour = hour;}
+    public Space getSpace(){return space;}
+    public void setSpace(Space space){this.space = space;}
+    public String getSpaceName(){return (space != null) ? space.getName() : "N/A";}
+    public String getDateAsString() {
+        return startDateTime != null ? startDateTime.toLocalDate().toString() : "N/A";
+    }
+    public String getHourAsString() {
+        return startDateTime != null ? startDateTime.toLocalTime().toString() : "N/A";
+    }
+
 
     // Métodos utilitários
     @Override

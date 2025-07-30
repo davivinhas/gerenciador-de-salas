@@ -1,7 +1,9 @@
 package dao;
 
+import model.Classroom;
 import model.Reservation;
 import model.ReservationStatus;
+import model.Space;
 import util.connectionDB;
 
 import java.sql.*;
@@ -129,7 +131,10 @@ public class ReservationDao implements DataAccessObject<Reservation> {
         Connection connection = null;
         try {
             connection = connectionDB.getConnection();
-            String sql = "SELECT * FROM reservations ORDER BY start_datetime";
+            String sql = "SELECT r.*, s.name AS space_name " +
+                    "FROM reservations r " +
+                    "JOIN spaces s ON r.space_id = s.id " +
+                    "ORDER BY r.start_datetime";;
             PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
@@ -159,8 +164,41 @@ public class ReservationDao implements DataAccessObject<Reservation> {
         r.setEndDateTime(rs.getTimestamp("end_datetime").toLocalDateTime());
         r.setDescription(rs.getString("description"));
         r.setCreationDate(rs.getTimestamp("creation_date").toLocalDateTime());
+
+        Space space = new Classroom(); // ou Laboratory, ou qualquer subclasse concreta
+        space.setId(rs.getInt("space_id"));
+        space.setName(rs.getString("space_name"));
+        r.setSpace(space);
+
         return r;
     }
 
-    // Você pode adicionar métodos auxiliares, como buscar por status, usuário, ou espaço se quiser.
+    public List<Reservation> listByUserId(int userId) {
+        List<Reservation> reservations = new ArrayList<>();
+        Connection connection = null;
+        try {
+            connection = connectionDB.getConnection();
+            String sql = "SELECT r.*, s.name AS space_name " +
+                    "FROM reservations r " +
+                    "JOIN spaces s ON r.space_id = s.id " +
+                    "WHERE r.user_id = ?";
+            PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql);
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                reservations.add(mapResultSetToReservation(rs));
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar reservas por usuário: " + e.getMessage());
+        } finally {
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                System.err.println("Erro ao fechar conexão: " + e.getMessage());
+            }
+        }
+        return reservations;
+    }
 }
