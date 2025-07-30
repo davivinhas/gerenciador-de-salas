@@ -17,6 +17,7 @@ public class UserController {
     // Criar usuário
     public boolean createUser(String name, String email, String password, UserType userType) { //cria o user
         User user = new User(0, name, email, password, userType);
+        user.setCreationDate(java.time.LocalDateTime.now());
         boolean success = userDao.insert(user);
         Logger.logIfSuccess(success, "Usuário criado: " + email);
         return success;
