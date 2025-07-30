@@ -145,4 +145,9 @@ public class ReservationController {
         // Verifica conflitos de horário
         return !hasTimeConflict(spaceId, startDateTime, endDateTime);
     }
+
+    // Lista reservas de um usuário
+    public List<Reservation> getReservationsByUserId(int userId) {
+        return reservationDao.listByUserId(userId);
+    }
 }

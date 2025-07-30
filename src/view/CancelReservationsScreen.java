@@ -81,29 +81,33 @@ public class CancelReservationsScreen extends JFrame {
             }
         });
     }
-    //reservas do user na tabela
+
+    //reservas do user na tabela - CORRIGIDO
     private void loadReservations() {
         tableModel.setRowCount(0);   //limpa a tabela
 
-        //all reservas
-        List<Reservation> reservations = reservationController.listAllReservations();
+        // Usa o método específico para buscar reservas do usuário
+        List<Reservation> reservations = reservationController.getReservationsByUserId(user.getId());
 
         if (reservations != null) {
             for (Reservation reservation : reservations) {
-                if (reservation.getUserId() == user.getId()) { //filtra só do user logado
+                // Pega o nome do espaço
+                String spaceName = reservation.getSpaceName(); // Já vem do JOIN
+                if (spaceName == null || spaceName.equals("N/A")) {
                     Space space = spaceController.getSpaceById(reservation.getSpaceId());
-                    String spaceName = (space != null) ? space.getName() : "Desconhecido";
-                    //cria a linha com as infos pra tabela
-                    Object[] rowData = {
-                            reservation.getId(),
-                            spaceName,
-                            reservation.getStartDateTime(),
-                            reservation.getEndDateTime(),
-                            reservation.getDescription(),
-                            reservation.getStatus().getDescription()
-                    };
-                    tableModel.addRow(rowData); //add na table
+                    spaceName = (space != null) ? space.getName() : "Desconhecido";
                 }
+
+                //cria a linha com as infos pra tabela
+                Object[] rowData = {
+                        reservation.getId(),
+                        spaceName,
+                        reservation.getStartDateTime(),
+                        reservation.getEndDateTime(),
+                        reservation.getDescription(),
+                        reservation.getStatus().getDescription()
+                };
+                tableModel.addRow(rowData); //add na table
             }
         }
     }
@@ -133,7 +137,7 @@ public class CancelReservationsScreen extends JFrame {
             boolean success = reservationController.cancelReservation(reservation);
             if (success) {
                 JOptionPane.showMessageDialog(this, "Reserva cancelada com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                loadReservations();
+                loadReservations(); // Recarrega a tabela
             } else {
                 JOptionPane.showMessageDialog(this, "Erro ao cancelar a reserva.", "Erro", JOptionPane.ERROR_MESSAGE);
             }

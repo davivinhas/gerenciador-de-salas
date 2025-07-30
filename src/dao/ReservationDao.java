@@ -15,11 +15,10 @@ public class ReservationDao implements DataAccessObject<Reservation> {
 
     @Override
     public boolean insert(Reservation reservation) {
-        Connection connection = null;
+        String sql = "INSERT INTO reservations (user_id, space_id, status, start_datetime, end_datetime, description, creation_date) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
-            connection = connectionDB.getConnection();
-            String sql = "INSERT INTO reservations (user_id, space_id, status, start_datetime, end_datetime, description, creation_date) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            Connection connection = connectionDB.getConnection();
             PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, reservation.getUserId());
             stmt.setInt(2, reservation.getSpaceId());
@@ -37,27 +36,18 @@ public class ReservationDao implements DataAccessObject<Reservation> {
                     return true;
                 }
             }
-
         } catch (SQLException e) {
             System.err.println("Erro ao inserir reserva: " + e.getMessage());
-        } finally {
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                System.err.println("Erro ao fechar conexão: " + e.getMessage());
-            }
         }
         return false;
     }
 
     @Override
     public boolean update(Reservation reservation) {
-        Connection connection = null;
+        String sql = "UPDATE reservations SET user_id = ?, space_id = ?, status = ?, start_datetime = ?, end_datetime = ?, description = ? WHERE id = ?";
         try {
-            connection = connectionDB.getConnection();
-            String sql = "UPDATE reservations SET user_id = ?, space_id = ?, status = ?, start_datetime = ?, end_datetime = ?, description = ? WHERE id = ?";
+            Connection connection = connectionDB.getConnection();
             PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql);
-
             stmt.setInt(1, reservation.getUserId());
             stmt.setInt(2, reservation.getSpaceId());
             stmt.setString(3, reservation.getStatus().name());
@@ -69,43 +59,29 @@ public class ReservationDao implements DataAccessObject<Reservation> {
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Erro ao atualizar reserva: " + e.getMessage());
-        } finally {
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                System.err.println("Erro ao fechar conexão: " + e.getMessage());
-            }
         }
         return false;
     }
 
     @Override
     public boolean delete(Reservation reservation) {
-        Connection connection = null;
+        String sql = "DELETE FROM reservations WHERE id = ?";
         try {
-            connection = connectionDB.getConnection();
-            String sql = "DELETE FROM reservations WHERE id = ?";
+            Connection connection = connectionDB.getConnection();
             PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql);
             stmt.setInt(1, reservation.getId());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Erro ao deletar reserva: " + e.getMessage());
-        } finally {
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                System.err.println("Erro ao fechar conexão: " + e.getMessage());
-            }
         }
         return false;
     }
 
     @Override
     public Reservation findById(int id) {
-        Connection connection = null;
+        String sql = "SELECT r.*, s.name AS space_name FROM reservations r LEFT JOIN spaces s ON r.space_id = s.id WHERE r.id = ?";
         try {
-            connection = connectionDB.getConnection();
-            String sql = "SELECT * FROM reservations WHERE id = ?";
+            Connection connection = connectionDB.getConnection();
             PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -115,45 +91,47 @@ public class ReservationDao implements DataAccessObject<Reservation> {
             }
         } catch (SQLException e) {
             System.err.println("Erro ao buscar reserva: " + e.getMessage());
-        } finally {
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                System.err.println("Erro ao fechar conexão: " + e.getMessage());
-            }
         }
         return null;
     }
 
     @Override
     public List<Reservation> listAll() {
+        String sql = "SELECT r.*, s.name AS space_name FROM reservations r LEFT JOIN spaces s ON r.space_id = s.id ORDER BY r.start_datetime";
         List<Reservation> reservations = new ArrayList<>();
-        Connection connection = null;
         try {
-            connection = connectionDB.getConnection();
-            String sql = "SELECT r.*, s.name AS space_name " +
-                    "FROM reservations r " +
-                    "JOIN spaces s ON r.space_id = s.id " +
-                    "ORDER BY r.start_datetime";;
+            Connection connection = connectionDB.getConnection();
             PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 reservations.add(mapResultSetToReservation(rs));
             }
-
         } catch (SQLException e) {
             System.err.println("Erro ao listar reservas: " + e.getMessage());
-        } finally {
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                System.err.println("Erro ao fechar conexão: " + e.getMessage());
-            }
         }
         return reservations;
     }
 
+    public List<Reservation> listByUserId(int userId) {
+        String sql = "SELECT r.*, s.name AS space_name FROM reservations r LEFT JOIN spaces s ON r.space_id = s.id WHERE r.user_id = ? ORDER BY r.start_datetime";
+        List<Reservation> reservations = new ArrayList<>();
+        try {
+            Connection connection = connectionDB.getConnection();
+            PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql);
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                reservations.add(mapResultSetToReservation(rs));
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar reservas por usuário: " + e.getMessage());
+        }
+        return reservations;
+    }
+
+    // Método para mapear ResultSet para Reservation
     private Reservation mapResultSetToReservation(ResultSet rs) throws SQLException {
         Reservation r = new Reservation();
         r.setId(rs.getInt("id"));
@@ -165,40 +143,15 @@ public class ReservationDao implements DataAccessObject<Reservation> {
         r.setDescription(rs.getString("description"));
         r.setCreationDate(rs.getTimestamp("creation_date").toLocalDateTime());
 
-        Space space = new Classroom(); // ou Laboratory, ou qualquer subclasse concreta
-        space.setId(rs.getInt("space_id"));
-        space.setName(rs.getString("space_name"));
-        r.setSpace(space);
+        // Mapeia o espaço se existir
+        String spaceName = rs.getString("space_name");
+        if (spaceName != null) {
+            Space space = new Classroom(); // ou qualquer subclasse concreta
+            space.setId(rs.getInt("space_id"));
+            space.setName(spaceName);
+            r.setSpace(space);
+        }
 
         return r;
-    }
-
-    public List<Reservation> listByUserId(int userId) {
-        List<Reservation> reservations = new ArrayList<>();
-        Connection connection = null;
-        try {
-            connection = connectionDB.getConnection();
-            String sql = "SELECT r.*, s.name AS space_name " +
-                    "FROM reservations r " +
-                    "JOIN spaces s ON r.space_id = s.id " +
-                    "WHERE r.user_id = ?";
-            PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql);
-            stmt.setInt(1, userId);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                reservations.add(mapResultSetToReservation(rs));
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Erro ao buscar reservas por usuário: " + e.getMessage());
-        } finally {
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                System.err.println("Erro ao fechar conexão: " + e.getMessage());
-            }
-        }
-        return reservations;
     }
 }
