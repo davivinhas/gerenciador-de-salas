@@ -116,10 +116,9 @@ public class LoginFrame extends JFrame {
                     "Login realizado com sucesso!\nBem-vindo, " + user.getName(),
                     "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
-            // Aqui você pode abrir a tela principal do sistema
-            // MainFrame mainFrame = new MainFrame(user);
-            // mainFrame.setVisible(true);
-            // this.dispose();
+            MenuFrame menuFrame = new MenuFrame(user);
+            menuFrame.showMenu();
+            this.dispose();
 
         } else {
             showError("Email ou senha incorretos!");
