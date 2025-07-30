@@ -48,5 +48,3 @@ public class connectionDB {
             System.out.println("❌ Falha ao conectar com o banco de dados.");
         }
     }
-
-}
