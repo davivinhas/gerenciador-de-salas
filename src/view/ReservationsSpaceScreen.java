@@ -1,7 +1,7 @@
 package view;
 
-import dao.ReservationDao;
-import dao.SpaceDao;
+import controller.ReservationController;
+import controller.SpaceController;
 import model.Reservation;
 import model.ReservationStatus;
 import model.Space;
@@ -18,8 +18,8 @@ import java.util.List;
 
 public class ReservationsSpaceScreen extends JFrame {
 
-    private final SpaceDao spaceDao;
-    private final ReservationDao reservationDao;
+    private final ReservationController reservationController;
+    private final SpaceController spaceController;
     private final int loggedUserId;
 
     // Campos de interface (componentes que precisam ser acessados)
@@ -27,8 +27,8 @@ public class ReservationsSpaceScreen extends JFrame {
     private JTextField dateField, startTimeField, endTimeField, purposeField;
 
     public ReservationsSpaceScreen(int loggedUserId) {
-        this.spaceDao = new SpaceDao();
-        this.reservationDao = new ReservationDao();
+        this.reservationController = new ReservationController();
+        this.spaceController = new SpaceController();
         this.loggedUserId = loggedUserId;
         setupUI(); // Monta a interface e exibe a janela
     }
@@ -94,11 +94,6 @@ public class ReservationsSpaceScreen extends JFrame {
         JButton reserveButton = new JButton("Fazer Reserva");
         reserveButton.setBounds(100, 270, 200, 30);
         add(reserveButton);
-        /*
-        JButton listButton = new JButton("Minhas Reservas");
-        listButton.setBounds(100, 310, 200, 30);
-        add(listButton);
-        */
 
         // Ações
         checkButton.addActionListener(e -> verificarDisponibilidade());
@@ -110,7 +105,7 @@ public class ReservationsSpaceScreen extends JFrame {
 
     private void loadSpaces(JComboBox<String> combo) {
         try {
-            List<Space> spaces = spaceDao.listAll();
+            List<Space> spaces = spaceController.listAllSpaces();
             combo.removeAllItems();
 
             if (spaces == null || spaces.isEmpty()) {
@@ -183,16 +178,7 @@ public class ReservationsSpaceScreen extends JFrame {
                 return;
             }
 
-            Reservation reservation = new Reservation();
-            reservation.setUserId(loggedUserId);
-            reservation.setSpaceId(spaceId);
-            reservation.setStartDateTime(start);
-            reservation.setEndDateTime(end);
-            reservation.setDescription(purposeField.getText().trim());
-            reservation.setStatus(ReservationStatus.PENDING);
-            reservation.setCreationDate(LocalDateTime.now());
-
-            boolean success = reservationDao.insert(reservation);
+            boolean success = reservationController.createReservation(loggedUserId, spaceId, start, end, purposeField.getText().trim());
 
             if (success) {
                 JOptionPane.showMessageDialog(this,
@@ -210,32 +196,6 @@ public class ReservationsSpaceScreen extends JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao fazer reserva: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void listarReservas() {
-        try {
-            List<Reservation> reservas = findReservationsByUser(loggedUserId);
-
-            if (reservas.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Você não possui reservas!");
-                return;
-            }
-
-            StringBuilder sb = new StringBuilder("Suas Reservas:\n\n");
-            for (Reservation r : reservas) {
-                Space s = spaceDao.findById(r.getSpaceId());
-                sb.append("Espaço: ").append(s != null ? s.getName() : "N/A").append("\n");
-                sb.append("Data: ").append(r.getStartDateTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))).append("\n");
-                sb.append("Horário: ").append(r.getStartDateTime().format(DateTimeFormatter.ofPattern("HH:mm")))
-                        .append(" às ").append(r.getEndDateTime().format(DateTimeFormatter.ofPattern("HH:mm"))).append("\n");
-                sb.append("Finalidade: ").append(r.getDescription()).append("\n");
-                sb.append("Status: ").append(r.getStatus()).append("\n\n");
-            }
-
-            JOptionPane.showMessageDialog(this, sb.toString());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar reservas: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -266,10 +226,10 @@ public class ReservationsSpaceScreen extends JFrame {
 
     private boolean checkAvailability(int spaceId, LocalDateTime start, LocalDateTime end) {
         try {
-            Space space = spaceDao.findById(spaceId);
+            Space space = spaceController.getSpaceById(spaceId);
             if (space == null) return false;
 
-            List<Reservation> todas = reservationDao.listAll();
+            List<Reservation> todas = reservationController.listAllReservations();
             for (Reservation r : todas) {
                 if (r.getSpaceId() == spaceId &&
                         (r.getStatus() == ReservationStatus.CONFIRMED || r.getStatus() == ReservationStatus.PENDING)) {
@@ -285,7 +245,7 @@ public class ReservationsSpaceScreen extends JFrame {
     }
 
     private List<Reservation> findReservationsByUser(int userId) {
-        return reservationDao.listAll().stream()
+        return reservationController.listAllReservations().stream()
                 .filter(r -> r.getUserId() == userId)
                 .sorted((r1, r2) -> r2.getStartDateTime().compareTo(r1.getStartDateTime()))
                 .toList();
@@ -295,7 +255,6 @@ public class ReservationsSpaceScreen extends JFrame {
         for (JTextField f : fields) f.setText("");
     }
 
-    // opcional: para testes independentes
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new ReservationsSpaceScreen(1));
     }
