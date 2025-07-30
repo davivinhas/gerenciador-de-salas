@@ -94,15 +94,16 @@ public class ReservationsSpaceScreen extends JFrame {
         JButton reserveButton = new JButton("Fazer Reserva");
         reserveButton.setBounds(100, 270, 200, 30);
         add(reserveButton);
-
+        /*
         JButton listButton = new JButton("Minhas Reservas");
         listButton.setBounds(100, 310, 200, 30);
         add(listButton);
+        */
 
         // Ações
         checkButton.addActionListener(e -> verificarDisponibilidade());
         reserveButton.addActionListener(e -> fazerReserva());
-        listButton.addActionListener(e -> listarReservas());
+        //listButton.addActionListener(e -> listarReservas());
 
         setVisible(true);
     }
