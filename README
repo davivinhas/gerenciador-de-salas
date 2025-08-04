@@ -1,0 +1,50 @@
+Trabalho Final - Gerenciador de Salas
+
+Curso: Ciência da Computação
+Disciplina: Linguagem de Programação II
+Professor: Tiago Bonini Borchartt
+
+# Alunos:
+-Davi Vinhas
+-Eliezer Pestana
+-Maria Clara Teixeira
+-Mateus Alves
+
+# Ambiente no qual o programa foi desenvolvido:
+-Linguagem: JAVA
+-IDE: Intellij
+-Banco de dados: MySql
+
+# Descrição:
+-Este projeto é um sistema de gerenciamento de salas que permite cadastro de usúarios e salas, reserva de salas,
+verificação de disponibilidade de horários, entre outras funcionalidades.
+
+
+# Manual de Uso:
+- Instale sua IDE de preferência
+- Instale e configure o MySql Community Server na sua IDE
+- Rode a classe loginFrame
+
+# Diagrama de Casos de Uso
+ATORES
+-Usuário Comum
+-Administrador
+
+CASOS DE USO - USUÁRIO COMUM
+-Fazer login
+-Visualizar espaços disponíveis
+-Reservar espaço
+-Visualizar suas reservas
+-Cancelar reserva
+
+CASOS DE USO - ADMINISTRADOR
+-Realizar login
+-Cadastrar novo usuário
+-Listar usuários
+-Excluir usuários
+-Cadastrar novo espaço
+-Listar espaços
+-Remover espaço
+-Visualizar todas as reservas
+-Cancelar reservas
+-Gerenciar status das reservas
