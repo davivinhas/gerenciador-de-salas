@@ -15,7 +15,7 @@ public class MenuFrame extends JFrame {
     }
 
     private void configureWindow() {
-        setSize(650, 600);
+        setSize(650, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
@@ -44,7 +44,7 @@ public class MenuFrame extends JFrame {
         addButton("Reservar Espaço", e -> openScreen(new ReservationsSpaceScreen(user.getId())));
         addButton("Ver Reservas", e -> openScreen(new ViewReservationsScreen(user)));
         addButton("Cancelar Reserva", e -> openScreen(new CancelReservationsScreen(user)));
-
+        addButton("Listar Espaços", e -> openScreen(new SpaceListingScreen()));
         //botões para os admin
         if (user.getType() == UserType.ADMIN) {
             add(Box.createRigidArea(new Dimension(0, 20)));
